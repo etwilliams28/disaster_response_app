@@ -45,6 +45,7 @@ def clean_data(df):
     df = pd.concat([df,categories],axis=1)
     df.duplicated(subset=None, keep='first').sum()
     df.drop_duplicates(inplace=True)
+    df = df.head(200)
     
     return df
   
@@ -53,8 +54,8 @@ def clean_data(df):
         
 
 def save_data(df, database_filename):
-    engine = create_engine('sqlite:///messagedf.db')
-    df.to_sql('messagedf', engine, index=False)
+    engine = create_engine('sqlite:///small_response.db')
+    df.to_sql('small_response', engine, index=False)
 
 
 def main():

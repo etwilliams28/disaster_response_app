@@ -6,10 +6,13 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
 from flask import Flask
+import pickle
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
+
+
 
 
 app = Flask(__name__)
@@ -26,11 +29,12 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/messageCat.db')
-df = pd.read_sql_table('YourTableName', engine)
+engine = create_engine('sqlite:///../models/small_response.db')
+df = pd.read_sql_table('small_response', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model

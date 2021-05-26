@@ -32,7 +32,8 @@ def load_data(database_filepath):
     """
     
     engine = create_engine('sqlite:///' + database_filepath)
-    df = pd.read_sql_table('messagedf', engine)
+    df = pd.read_sql_table('small_response', engine)
+    df = df.head(300)
     X = df['message']
     y = df.drop(['id','message','original','genre'], axis=1)
     y = y.astype(int)
